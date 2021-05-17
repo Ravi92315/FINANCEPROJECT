@@ -1,7 +1,6 @@
 package com.finance.layer2;
 
 
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
