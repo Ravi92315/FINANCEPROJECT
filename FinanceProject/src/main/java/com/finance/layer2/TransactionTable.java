@@ -37,6 +37,7 @@ public class TransactionTable implements Serializable {
 	private OrderTable orderTable;
 
 	public TransactionTable() {
+		System.out.println("TransactionTable ctor is called..........");
 	}
 
 	public long getTransId() {

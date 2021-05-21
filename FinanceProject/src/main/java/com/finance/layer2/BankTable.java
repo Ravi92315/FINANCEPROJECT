@@ -44,6 +44,7 @@ public class BankTable implements Serializable {
 	private ApprovalTable approvalTable;
 
 	public BankTable() {
+		System.out.println("BankTable ctor is called..........");
 	}
 
 	public long getAccountNo() {

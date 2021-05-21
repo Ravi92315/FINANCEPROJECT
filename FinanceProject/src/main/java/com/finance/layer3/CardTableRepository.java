@@ -3,8 +3,10 @@ package com.finance.layer3;
 
 import java.util.Set;
 
-import com.finance.layer2.CardTable;
+import org.springframework.stereotype.Repository;
 
+import com.finance.layer2.CardTable;
+@Repository
 public interface CardTableRepository {
 	void addCard(CardTable cRef);   //C - add/create
 	CardTable findCard(int cardNo);     //R - find/reading

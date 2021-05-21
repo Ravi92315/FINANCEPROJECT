@@ -48,6 +48,7 @@ public class CardTable implements Serializable {
 	private ApprovalTable approvalTable2;
 
 	public CardTable() {
+		System.out.println("CardTable ctor called..........");
 	}
 
 	public long getCardNo() {

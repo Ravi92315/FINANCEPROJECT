@@ -27,6 +27,7 @@ public class ProductTable implements Serializable {
 	private Set<OrderTable> orderTables;
 
 	public ProductTable() {
+		System.out.println("ProdectTable ctor is called..........");
 	}
 
 	public long getProductId() {

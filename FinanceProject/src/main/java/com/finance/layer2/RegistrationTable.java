@@ -54,6 +54,7 @@ public class RegistrationTable implements Serializable {
 	private BankTable bankTable;
 
 	public RegistrationTable() {
+		System.out.println("RegistrationTable ctor is called..........");
 	}
 
 	public long getAdharCard() {
