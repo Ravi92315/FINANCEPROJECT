@@ -1,6 +1,7 @@
 package com.finance.layer3;
 
 import java.util.ArrayList;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -33,7 +34,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 	}
 
 	@Transactional
-	public OrderTable findOrder(int ordno) {
+	public OrderTable findOrder(long ordno) {
 		System.out.println("Order repo....NO scope of bussiness logic here...");
 		return entityManager.find(OrderTable.class,ordno);
 	
@@ -42,7 +43,7 @@ public class OrderRepositoryImpl implements OrderRepository {
 	@Transactional
 	public Set<OrderTable> findAllOrders() {
 		// TODO Auto-generated method stub
-		Set<OrderTable> orderSet = new HashSet<>();
+		Set<OrderTable> orderSet = new HashSet<>();;
 		TypedQuery<OrderTable> query =
                 entityManager.createNamedQuery("OrderTable.findAll", OrderTable.class);
                  orderSet = (Set<OrderTable>) query.getResultList();

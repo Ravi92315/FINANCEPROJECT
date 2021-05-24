@@ -16,6 +16,7 @@ public class ProductTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="PRODUCT_ID")
 	private long productId;
 
@@ -27,7 +28,6 @@ public class ProductTable implements Serializable {
 	private Set<OrderTable> orderTables;
 
 	public ProductTable() {
-		System.out.println("ProdectTable ctor is called..........");
 	}
 
 	public long getProductId() {

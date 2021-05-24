@@ -1,5 +1,4 @@
 package com.finance.layer2;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Date;
@@ -17,6 +16,7 @@ public class CardTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="CARD_NO")
 	private long cardNo;
 
@@ -34,10 +34,10 @@ public class CardTable implements Serializable {
 	@Column(name="START_DATE")
 	private Date startDate;
 
-	//bi-directional many-to-one association to ApprovalTable
-	@ManyToOne
-	@JoinColumn(name="APPROVAL_NO")
-	private ApprovalTable approvalTable1;
+//	//bi-directional many-to-one association to ApprovalTable
+//	@ManyToOne
+//	@JoinColumn(name="APPROVAL_NO")
+//	private ApprovalTable approvalTable1;
 
 	//bi-directional many-to-one association to OrderTable
 	@OneToMany(mappedBy="cardTable", fetch=FetchType.EAGER)
@@ -48,7 +48,6 @@ public class CardTable implements Serializable {
 	private ApprovalTable approvalTable2;
 
 	public CardTable() {
-		System.out.println("CardTable ctor called..........");
 	}
 
 	public long getCardNo() {
@@ -91,13 +90,13 @@ public class CardTable implements Serializable {
 		this.startDate = startDate;
 	}
 
-	public ApprovalTable getApprovalTable1() {
-		return this.approvalTable1;
-	}
-
-	public void setApprovalTable1(ApprovalTable approvalTable1) {
-		this.approvalTable1 = approvalTable1;
-	}
+//	public ApprovalTable getApprovalTable1() {
+//		return this.approvalTable1;
+//	}
+//
+//	public void setApprovalTable1(ApprovalTable approvalTable1) {
+//		this.approvalTable1 = approvalTable1;
+//	}
 
 	public Set<OrderTable> getOrderTables() {
 		return this.orderTables;

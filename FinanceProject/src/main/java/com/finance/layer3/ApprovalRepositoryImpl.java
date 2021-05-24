@@ -27,7 +27,7 @@ public class ApprovalRepositoryImpl implements ApprovalRepository {
 	}
 	
 	@Transactional
-	public ApprovalTable findApproval(int approvalNo) {//producesA Department obj
+	public ApprovalTable findApproval(long approvalNo) {//producesA Department obj
 		System.out.println("ApprovalTable repo....NO scope of bussiness logic here...");
 		return entityManager.find(ApprovalTable.class,approvalNo);
 		
@@ -55,7 +55,7 @@ public class ApprovalRepositoryImpl implements ApprovalRepository {
 	}
 
 	@Transactional
-	public void removeApproval(int approvalNo) {
+	public void removeApproval(long approvalNo) {
 		ApprovalTable aTemp = entityManager.find(ApprovalTable.class,approvalNo);
 		entityManager.remove(aTemp);
 		

@@ -17,6 +17,7 @@ public class OrderTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ORD_ID")
 	private long ordId;
 
@@ -24,12 +25,13 @@ public class OrderTable implements Serializable {
 	@Column(name="DATE_ORDER")
 	private Date dateOrder;
 
-	private String emi;
+	@Column(name="EMI_MONTHS")
+	private int emiMonths;
 
 	@Column(name="EMI_PER_MONTH")
 	private Double emiPerMonth;
 
-	private Integer quantity;
+	private int quantity;
 
 	@Column(name="REMAINING_AMOUNT")
 	private Double remainingAmount;
@@ -52,7 +54,6 @@ public class OrderTable implements Serializable {
 	private Set<TransactionTable> transactionTables;
 
 	public OrderTable() {
-		System.out.println("OrderTable ctor is called..........");
 	}
 
 	public long getOrdId() {
@@ -71,12 +72,12 @@ public class OrderTable implements Serializable {
 		this.dateOrder = dateOrder;
 	}
 
-	public String getEmi() {
-		return this.emi;
+	public int getEmiMonths() {
+		return this.emiMonths;
 	}
 
-	public void setEmi(String emi) {
-		this.emi = emi;
+	public void setEmiMonths(int emiMonths) {
+		this.emiMonths = emiMonths;
 	}
 
 	public Double getEmiPerMonth() {
@@ -87,11 +88,11 @@ public class OrderTable implements Serializable {
 		this.emiPerMonth = emiPerMonth;
 	}
 
-	public Integer getQuantity() {
+	public int getQuantity() {
 		return this.quantity;
 	}
 
-	public void setQuantity(Integer quantity) {
+	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
 

@@ -1,6 +1,5 @@
 package com.finance.layer2;
 
-
 import java.io.Serializable;
 import javax.persistence.*;
 import java.util.Set;
@@ -17,6 +16,7 @@ public class ApprovalTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="APPROVAL_NO")
 	private long approvalNo;
 
@@ -24,20 +24,20 @@ public class ApprovalTable implements Serializable {
 	private String approvalStatus;
 
 	@Column(name="CARD_FEE")
-	private Double cardFee;
+	private long cardFee;
 
-	//bi-directional many-to-one association to BankTable
-	@ManyToOne
-	@JoinColumn(name="ACCOUNT_NO")
-	private BankTable bankTable1;
+//	//bi-directional many-to-one association to RegistrationTable
+//	@ManyToOne
+//	@JoinColumn(name="REG_ID")
+//	private RegistrationTable registrationTable1;
 
 	//bi-directional many-to-one association to CardTable
-	@OneToMany(mappedBy="approvalTable1", fetch=FetchType.EAGER)
-	private Set<CardTable> cardTables;
+//	@OneToMany(mappedBy="approvalTable1", fetch=FetchType.EAGER)
+//	private Set<CardTable> cardTables;
 
-	//bi-directional one-to-one association to BankTable
+	//bi-directional one-to-one association to RegistrationTable
 	@OneToOne(mappedBy="approvalTable")
-	private BankTable bankTable2;
+	private RegistrationTable registrationTable2;
 
 	//bi-directional one-to-one association to CardTable
 	@OneToOne
@@ -45,7 +45,6 @@ public class ApprovalTable implements Serializable {
 	private CardTable cardTable;
 
 	public ApprovalTable() {
-		System.out.println("ApprovalTable  ctor is called....");
 	}
 
 	public long getApprovalNo() {
@@ -64,58 +63,58 @@ public class ApprovalTable implements Serializable {
 		this.approvalStatus = approvalStatus;
 	}
 
-	public Double getCardFee() {
+	public long getCardFee() {
 		return this.cardFee;
 	}
 
-	public void setCardFee(Double cardFee) {
+	public void setCardFee(long cardFee) {
 		this.cardFee = cardFee;
 	}
 
-	public BankTable getBankTable1() {
-		return this.bankTable1;
+//	public RegistrationTable getRegistrationTable1() {
+//		return this.registrationTable1;
+//	}
+//
+//	public void setRegistrationTable1(RegistrationTable registrationTable1) {
+//		this.registrationTable1 = registrationTable1;
+//	}
+
+//	public Set<CardTable> getCardTables() {
+//		return this.cardTables;
+//	}
+//
+//	public void setCardTables(Set<CardTable> cardTables) {
+//		this.cardTables = cardTables;
+//	}
+
+//	public CardTable addCardTable(CardTable cardTable) {
+//		getCardTables().add(cardTable);
+//		cardTable.setApprovalTable1(this);
+//
+//		return cardTable;
+//	}
+//
+//	public CardTable removeCardTable(CardTable cardTable) {
+//		getCardTables().remove(cardTable);
+//		cardTable.setApprovalTable1(null);
+//
+//		return cardTable;
+//	}
+
+	public RegistrationTable getRegistrationTable2() {
+		return this.registrationTable2;
 	}
 
-	public void setBankTable1(BankTable bankTable1) {
-		this.bankTable1 = bankTable1;
+	public void setRegistrationTable2(RegistrationTable registrationTable2) {
+		this.registrationTable2 = registrationTable2;
 	}
 
-	public Set<CardTable> getCardTables() {
-		return this.cardTables;
-	}
-
-	public void setCardTables(Set<CardTable> cardTables) {
-		this.cardTables = cardTables;
-	}
-
-	public CardTable addCardTable(CardTable cardTable) {
-		getCardTables().add(cardTable);
-		cardTable.setApprovalTable1(this);
-
-		return cardTable;
-	}
-
-	public CardTable removeCardTable(CardTable cardTable) {
-		getCardTables().remove(cardTable);
-		cardTable.setApprovalTable1(null);
-
-		return cardTable;
-	}
-
-	public BankTable getBankTable2() {
-		return this.bankTable2;
-	}
-
-	public void setBankTable2(BankTable bankTable2) {
-		this.bankTable2 = bankTable2;
-	}
-
-	public CardTable getCardTable() {
-		return this.cardTable;
-	}
-
-	public void setCardTable(CardTable cardTable) {
-		this.cardTable = cardTable;
-	}
+//	public CardTable getCardTable() {
+//		return this.cardTable;
+//	}
+//
+//	public void setCardTable(CardTable cardTable) {
+//		this.cardTable = cardTable;
+//	}
 
 }

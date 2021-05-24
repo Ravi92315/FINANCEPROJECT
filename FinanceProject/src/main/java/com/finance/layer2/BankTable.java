@@ -2,7 +2,6 @@ package com.finance.layer2;
 
 import java.io.Serializable;
 import javax.persistence.*;
-import java.util.Set;
 
 
 /**
@@ -16,6 +15,7 @@ public class BankTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="ACCOUNT_NO")
 	private long accountNo;
 
@@ -25,26 +25,12 @@ public class BankTable implements Serializable {
 	@Column(name="IFSC_CODE")
 	private String ifscCode;
 
-	//bi-directional many-to-one association to ApprovalTable
-	@OneToMany(mappedBy="bankTable1", fetch=FetchType.EAGER)
-	private Set<ApprovalTable> approvalTables;
-
 	//bi-directional many-to-one association to RegistrationTable
 	@ManyToOne
-	@JoinColumn(name="ADHAR_CARD")
-	private RegistrationTable registrationTable1;
-
-	//bi-directional one-to-one association to RegistrationTable
-	@OneToOne(mappedBy="bankTable")
-	private RegistrationTable registrationTable2;
-
-	//bi-directional one-to-one association to ApprovalTable
-	@OneToOne
-	@JoinColumn(name="ACCOUNT_NO", referencedColumnName="ACCOUNT_NO")
-	private ApprovalTable approvalTable;
+	@JoinColumn(name="REG_ID")
+	private RegistrationTable registrationTable;
 
 	public BankTable() {
-		System.out.println("BankTable ctor is called..........");
 	}
 
 	public long getAccountNo() {
@@ -71,50 +57,12 @@ public class BankTable implements Serializable {
 		this.ifscCode = ifscCode;
 	}
 
-	public Set<ApprovalTable> getApprovalTables() {
-		return this.approvalTables;
+	public RegistrationTable getRegistrationTable() {
+		return this.registrationTable;
 	}
 
-	public void setApprovalTables(Set<ApprovalTable> approvalTables) {
-		this.approvalTables = approvalTables;
-	}
-
-	public ApprovalTable addApprovalTable(ApprovalTable approvalTable) {
-		getApprovalTables().add(approvalTable);
-		approvalTable.setBankTable1(this);
-
-		return approvalTable;
-	}
-
-	public ApprovalTable removeApprovalTable(ApprovalTable approvalTable) {
-		getApprovalTables().remove(approvalTable);
-		approvalTable.setBankTable1(null);
-
-		return approvalTable;
-	}
-
-	public RegistrationTable getRegistrationTable1() {
-		return this.registrationTable1;
-	}
-
-	public void setRegistrationTable1(RegistrationTable registrationTable1) {
-		this.registrationTable1 = registrationTable1;
-	}
-
-	public RegistrationTable getRegistrationTable2() {
-		return this.registrationTable2;
-	}
-
-	public void setRegistrationTable2(RegistrationTable registrationTable2) {
-		this.registrationTable2 = registrationTable2;
-	}
-
-	public ApprovalTable getApprovalTable() {
-		return this.approvalTable;
-	}
-
-	public void setApprovalTable(ApprovalTable approvalTable) {
-		this.approvalTable = approvalTable;
+	public void setRegistrationTable(RegistrationTable registrationTable) {
+		this.registrationTable = registrationTable;
 	}
 
 }

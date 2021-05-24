@@ -1,9 +1,11 @@
 package com.finance.layer2;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
+import java.time.LocalDate;
 
 
 /**
@@ -17,16 +19,21 @@ public class RegistrationTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="ADHAR_CARD")
-	private long adharCard;
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name="REG_ID")
+	private long regId;
 
 	private String address;
+
+	@Column(name="ADHAR_CARD")
+	private long adharCard;
 
 	@Column(name="CARD_TYPE")
 	private String cardType;
 
-	@Temporal(TemporalType.DATE)
-	private Date dob;
+	//@Temporal(TemporalType.DATE)
+	@Column(name="DOB",columnDefinition ="Date")
+	private LocalDate dob=LocalDate.now();
 
 	@Column(name="EMAIL_ID")
 	private String emailId;
@@ -36,33 +43,35 @@ public class RegistrationTable implements Serializable {
 	private String password;
 
 	@Column(name="PHONE_NO")
-	private Long phoneNo;
+	private long phoneNo;
 
-	@Temporal(TemporalType.DATE)
-	@Column(name="REGISTRATION_DATE")
-	private Date registrationDate;
+	@Column(name="REGISTRATION_DATE",columnDefinition="Date")
+	private LocalDate registrationDate=LocalDate.now();
 
 	private String username;
+//
+//	//bi-directional many-to-one association to ApprovalTable
+//	@OneToMany(mappedBy="registrationTable1", fetch=FetchType.EAGER)
+//	private Set<ApprovalTable> approvalTables;
 
 	//bi-directional many-to-one association to BankTable
-	@OneToMany(mappedBy="registrationTable1", fetch=FetchType.EAGER)
+	@OneToMany(mappedBy="registrationTable", fetch=FetchType.EAGER)
 	private Set<BankTable> bankTables;
 
-	//bi-directional one-to-one association to BankTable
+	//bi-directional one-to-one association to ApprovalTable
 	@OneToOne
-	@JoinColumn(name="ADHAR_CARD", referencedColumnName="ADHAR_CARD")
-	private BankTable bankTable;
+	@JoinColumn(name="REG_ID", referencedColumnName="REG_ID")
+	private ApprovalTable approvalTable;
 
 	public RegistrationTable() {
-		System.out.println("RegistrationTable ctor is called..........");
 	}
 
-	public long getAdharCard() {
-		return this.adharCard;
+	public long getRegId() {
+		return this.regId;
 	}
 
-	public void setAdharCard(long adharCard) {
-		this.adharCard = adharCard;
+	public void setRegId(long regId) {
+		this.regId = regId;
 	}
 
 	public String getAddress() {
@@ -73,6 +82,14 @@ public class RegistrationTable implements Serializable {
 		this.address = address;
 	}
 
+	public long getAdharCard() {
+		return this.adharCard;
+	}
+
+	public void setAdharCard(long adharCard) {
+		this.adharCard = adharCard;
+	}
+
 	public String getCardType() {
 		return this.cardType;
 	}
@@ -81,11 +98,11 @@ public class RegistrationTable implements Serializable {
 		this.cardType = cardType;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return this.dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
@@ -113,19 +130,19 @@ public class RegistrationTable implements Serializable {
 		this.password = password;
 	}
 
-	public Long getPhoneNo() {
+	public long getPhoneNo() {
 		return this.phoneNo;
 	}
 
-	public void setPhoneNo(Long phoneNo) {
+	public void setPhoneNo(long phoneNo) {
 		this.phoneNo = phoneNo;
 	}
 
-	public Date getRegistrationDate() {
+	public LocalDate getRegistrationDate() {
 		return this.registrationDate;
 	}
 
-	public void setRegistrationDate(Date registrationDate) {
+	public void setRegistrationDate(LocalDate registrationDate) {
 		this.registrationDate = registrationDate;
 	}
 
@@ -137,6 +154,28 @@ public class RegistrationTable implements Serializable {
 		this.username = username;
 	}
 
+//	public Set<ApprovalTable> getApprovalTables() {
+//		return this.approvalTables;
+//	}
+//
+//	public void setApprovalTables(Set<ApprovalTable> approvalTables) {
+//		this.approvalTables = approvalTables;
+//	}
+
+//	public ApprovalTable addApprovalTable(ApprovalTable approvalTable) {
+//		getApprovalTables().add(approvalTable);
+//		approvalTable.setRegistrationTable1(this);
+//
+//		return approvalTable;
+//	}
+//
+//	public ApprovalTable removeApprovalTable(ApprovalTable approvalTable) {
+//		getApprovalTables().remove(approvalTable);
+//		approvalTable.setRegistrationTable1(null);
+//
+//		return approvalTable;
+//	}
+
 	public Set<BankTable> getBankTables() {
 		return this.bankTables;
 	}
@@ -147,24 +186,24 @@ public class RegistrationTable implements Serializable {
 
 	public BankTable addBankTable(BankTable bankTable) {
 		getBankTables().add(bankTable);
-		bankTable.setRegistrationTable1(this);
+		bankTable.setRegistrationTable(this);
 
 		return bankTable;
 	}
 
 	public BankTable removeBankTable(BankTable bankTable) {
 		getBankTables().remove(bankTable);
-		bankTable.setRegistrationTable1(null);
+		bankTable.setRegistrationTable(null);
 
 		return bankTable;
 	}
 
-	public BankTable getBankTable() {
-		return this.bankTable;
+	public ApprovalTable getApprovalTable() {
+		return this.approvalTable;
 	}
 
-	public void setBankTable(BankTable bankTable) {
-		this.bankTable = bankTable;
+	public void setApprovalTable(ApprovalTable approvalTable) {
+		this.approvalTable = approvalTable;
 	}
 
 }

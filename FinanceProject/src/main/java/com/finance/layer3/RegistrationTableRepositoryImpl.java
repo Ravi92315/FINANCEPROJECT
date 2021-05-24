@@ -27,8 +27,8 @@ public class RegistrationTableRepositoryImpl implements RegistrationTableReposit
 	}
 
 	@Transactional
-	public RegistrationTable findRegistrationTable(long adharCard) {	
-		return entityManager.find(RegistrationTable.class, adharCard);
+	public RegistrationTable findRegistrationTable(long regId) {	
+		return entityManager.find(RegistrationTable.class, regId);
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class RegistrationTableRepositoryImpl implements RegistrationTableReposit
 
 	@Override
 	@Transactional
-	public void removeRegistrationTable(long adharCard) {
-		RegistrationTable regTemp = entityManager.find(RegistrationTable.class, adharCard);
+	public void removeRegistrationTable(long regId) {
+		RegistrationTable regTemp = entityManager.find(RegistrationTable.class, regId);
 		entityManager.remove(regTemp);
 	}
 

@@ -16,16 +16,17 @@ public class TransactionTable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="TRANS_ID")
 	private long transId;
 
 	@Column(name="DUE_AMT")
 	private Double dueAmt;
 
-	private Double instalment;
+	private Double installment;
 
 	@Column(name="MONTH_NO")
-	private Integer monthNo;
+	private int monthNo;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="TRANS_DATE")
@@ -37,7 +38,6 @@ public class TransactionTable implements Serializable {
 	private OrderTable orderTable;
 
 	public TransactionTable() {
-		System.out.println("TransactionTable ctor is called..........");
 	}
 
 	public long getTransId() {
@@ -56,19 +56,19 @@ public class TransactionTable implements Serializable {
 		this.dueAmt = dueAmt;
 	}
 
-	public Double getInstalment() {
-		return this.instalment;
+	public Double getInstallment() {
+		return this.installment;
 	}
 
-	public void setInstalment(Double instalment) {
-		this.instalment = instalment;
+	public void setInstallment(Double installment) {
+		this.installment = installment;
 	}
 
-	public Integer getMonthNo() {
+	public int getMonthNo() {
 		return this.monthNo;
 	}
 
-	public void setMonthNo(Integer monthNo) {
+	public void setMonthNo(int monthNo) {
 		this.monthNo = monthNo;
 	}
 
